@@ -52,8 +52,6 @@ div:nth-of-type(3) {
 }
 
 div:nth-of-type(3) > li {
-    width: 100px;
-    height: 100px;
     margin: 150px 0;
 }
 
