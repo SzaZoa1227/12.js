@@ -1,0 +1,65 @@
+body > div {
+    background-color: yellow;
+    display: flex;
+}
+
+body> div:nth-of-type(1){
+    width: 800px;
+    height: 300px;
+}
+
+body > div:nth-of-type(1) > div {
+    height: 100px;
+    width: 100px;
+}
+
+body>div:nth-of-type(1)>div:nth-child(1){
+    background-color: green;
+    display: none;
+}
+body>div:nth-of-type(1)>div:nth-child(2){
+    background-color: yellow;
+    display: none;
+}
+body>div:nth-of-type(1)>div:nth-child(3){
+    background-color: purple;
+    margin: 100px 350px;
+}
+
+div:nth-of-type(2), div:nth-of-type(3),div:nth-of-type(4) {
+    width: 100%;
+    height: 400px;
+}
+
+li{
+    list-style-type: none;
+    width: 100px;
+    height: 100px;
+    background-color: purple;
+}
+
+div:nth-of-type(2) > li {
+    
+    margin: 150px 5px 150px 5px;;
+}
+div:nth-of-type(2) > li:first-of-type {
+    margin-left: 0;
+}
+
+div:nth-of-type(3) {
+    align-items: start;
+    gap: 26%; /* elképzelésem sincs hogyan működik // dont touch */
+}
+
+div:nth-of-type(3) > li {
+    width: 100px;
+    height: 100px;
+    margin: 150px 0;
+}
+
+
+div:nth-of-type(4) {
+    align-items: end;
+    justify-content: end;
+    gap: 5px;
+}
