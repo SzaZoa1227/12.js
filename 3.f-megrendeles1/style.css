@@ -1,0 +1,36 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+body>div{
+    display: flex;
+    width: 100%;
+}
+body>div:nth-of-type(1){
+    width: 100%;
+    height: 80px;
+    background-color: purple;
+}
+
+body>div:nth-of-type(1)>div{
+    width: 150px;
+    height: 30px;
+    background-color: cyan;
+    margin: 25px 10px;
+}
+
+div:nth-of-type(2){
+    height: calc(100vh - 80px);
+    display: flex;
+}
+
+body>div:nth-of-type(2)>div:nth-of-type(1){
+    width: 66%;
+    height: 100%;
+    background-color: yellow;
+}
+body>div:nth-of-type(2)>div:nth-of-type(2){
+    width: 34%;
+    height: 100%;
+    background-color: green;
+}
