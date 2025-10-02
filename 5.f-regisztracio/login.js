@@ -11,7 +11,7 @@
     {
       let charsAfterDot = 0;
       charsAfterDot = email.length - email.lastIndexOf('.') - 1;
-      if (!email.includes('@') || !email.includes('.') || charsAfterDot === 0){
+      if (!email.includes('@') || !email.includes('.') || charsAfterDot < 2 || charsAfterDot > 3 ){
         emailHelp.textContent = 'Kérlek adj meg egy érvényes e-mail címet.';
         return false;
       }
