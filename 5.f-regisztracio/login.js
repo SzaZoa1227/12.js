@@ -1,5 +1,4 @@
-document.addEventListener('DOMContentLoaded',() => {
-    const form = document.getElementById('registerForm');
+    const form = document.getElementById('submit');
     const email = document.getElementById('email');
     const pw = document.getElementById('password');
     const pw2 = document.getElementById('password2');
@@ -12,10 +11,11 @@ document.addEventListener('DOMContentLoaded',() => {
     {
       let charsAfterDot = 0;
       charsAfterDot = email.length - email.lastIndexOf('.') - 1;
-      if (!email.contains('@') || !email.contains('.')){
+      if (!email.includes('@') || !email.includes('.') || charsAfterDot === 0){
         emailHelp.textContent = 'Kérlek adj meg egy érvényes e-mail címet.';
+        return false;
       }
-      return charsAfterDot;
+      return true
     }
 
     function clearErrors() {
@@ -24,20 +24,18 @@ document.addEventListener('DOMContentLoaded',() => {
       pw2Help.textContent = '';
       formMessage.textContent = '';
     }
-    form.addEventListener('submit', () => {
+    form.addEventListener('click', () => {
       clearErrors();
       let ok = true;
 
-      isValidEmail(email.value);
+      ok = isValidEmail(email.value);
       
       if (pw.value !== pw2.value) {
         pw2Help.textContent = 'A két jelszó nem egyezik.';
         ok = false;
       }
+      console.log(ok);
+      if (ok) {formMessage.textContent = 'Sikeres regisztráció (demo).'; console.log("Mukodok")}
+      
 
-      if (!ok) return;
-
-      formMessage.textContent = 'Sikeres regisztráció (demo).';
-      form.reset();
     });
-  });

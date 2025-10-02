@@ -43,6 +43,9 @@ button {
   color: #fff;
   font-weight: bold;
 }
+button:hover{
+  cursor: pointer;
+}
 .error {
   color: #b91c1c;
   font-size: 13px;
