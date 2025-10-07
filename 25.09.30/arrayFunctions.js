@@ -55,8 +55,18 @@ function monthlyStatistics(nums){
     for(let i = 0; i < 90;i++){
         out.push({i:0});
     }
-    out.forEach(x => console.log(x))
+    out.forEach(x => console.log(x));
     
+};
+function monthlyStatistics(nums){
+    let out = {};
+    nums.forEach(x => {
+        if (x in out){
+            out[x]++;
+        }
+        else{
+            out[x] = 1;
+        }
+    });
+    return out;
 }
-
-monthlyStatistics(getMonthlyLotteryArrayNumbers())
