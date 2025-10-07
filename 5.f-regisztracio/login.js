@@ -36,7 +36,7 @@
         ok = false;
       }
       else if (pw.value === ""){
-        pw2.pwHelp.textContent = 'Adj meg egy jelszót'
+        pw2Help.textContent = 'Adj meg egy jelszót'
       }
       console.log(ok);
       if (ok) {formMessage.textContent = 'Sikeres regisztráció (demo).'; console.log("Mukodok")}
