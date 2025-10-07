@@ -9,12 +9,13 @@
 
     function isValidEmail(email) 
     {
-      let charsAfterDot = 0;
-      charsAfterDot = email.length - email.lastIndexOf('.') - 1;
-      if (!email.includes('@') || !email.includes('.') || charsAfterDot < 2 || charsAfterDot > 3 ){
+      let charsAfterDot = email.length - email.lastIndexOf('.') - 1;
+      let charsAfterAt = email.length - email.lastIndexOf('@') - 2;
+      if (!email.includes('@') || !email.includes('.') || charsAfterDot < 2 || charsAfterDot > 3 || charsAfterDot === charsAfterAt){
         emailHelp.textContent = 'Kérlek adj meg egy érvényes e-mail címet.';
         return false;
       }
+      console.log(charsAfterDot,charsAfterAt);  
       return true
     }
 
@@ -33,6 +34,9 @@
       if (pw.value !== pw2.value) {
         pw2Help.textContent = 'A két jelszó nem egyezik.';
         ok = false;
+      }
+      else if (pw.value === ""){
+        pw2.pwHelp.textContent = 'Adj meg egy jelszót'
       }
       console.log(ok);
       if (ok) {formMessage.textContent = 'Sikeres regisztráció (demo).'; console.log("Mukodok")}
