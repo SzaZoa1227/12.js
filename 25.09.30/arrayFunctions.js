@@ -59,14 +59,11 @@ function monthlyStatistics(nums){
     
 };
 function monthlyStatistics(nums){
-    let out = {};
-    nums.forEach(x => {
-        if (x in out){
-            out[x]++;
+    let out = [];
+    for (let i = 0; i<91; i++){
+        
         }
-        else{
-            out[x] = 1;
-        }
-    });
+    
+    
     return out;
 }
