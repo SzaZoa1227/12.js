@@ -25,7 +25,7 @@ function isValid(email) {
     ok = false;
     return false;
   } else if (pw.value === "") {
-    pw2Help.textContent = "Adj meg egy jelszót";
+    pw2Help.textContent = "Adj meg egy jelszót.";
     return false;
   }
   console.log(charsAfterDot, charsAfterAt);
