@@ -7,7 +7,7 @@ const pwHelp = document.getElementById("pwHelp");
 const pw2Help = document.getElementById("pw2Help");
 const message = document.getElementById("message");
 
-function isValid(email) {
+function isValidEmail(email) {
   let charsAfterDot = email.length - email.lastIndexOf(".") - 1;
   let charsAfterAt = email.length - email.lastIndexOf("@") - 2;
   if (
@@ -20,6 +20,12 @@ function isValid(email) {
     emailHelp.textContent = "Kérlek adj meg egy érvényes e-mail címet.";
     return false;
   }
+
+  console.log(charsAfterDot, charsAfterAt);
+  return true;
+}
+
+function isValidPw(pw1, pw2) {
   if (pw.value !== pw2.value) {
     pw2Help.textContent = "A két jelszó nem egyezik.";
     ok = false;
@@ -28,8 +34,6 @@ function isValid(email) {
     pw2Help.textContent = "Adj meg egy jelszót.";
     return false;
   }
-  console.log(charsAfterDot, charsAfterAt);
-  return true;
 }
 
 function clearErrors() {
@@ -40,7 +44,7 @@ function clearErrors() {
 }
 btn.addEventListener("click", () => {
   clearErrors();
-  if (isValid(email.value,pw.value,pw2.value)){
+  if (isValidEmail(email.value) && isValidPw(pw.value, pw2.value)) {
     message.textContent = "Sikeres regisztráció. (demo)";
     console.log("Mukodok");
   }
