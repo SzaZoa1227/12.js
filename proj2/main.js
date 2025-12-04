@@ -1,10 +1,10 @@
+let classes = [];
 document.addEventListener("DOMContentLoaded", function() {
     let tds = document.querySelectorAll(".lesson-cell");
-    let classes = [];
     tds.forEach(function(cell) {
         if (cell.textContent.trim() !== "") {
-            cell.style.backgroundColor = "#ff5e5eff"; // világos zöld háttér
-            cell.style.fontWeight = "bold"; // félkövér betű
+            cell.style.backgroundColor = "#ff5e5eff"; 
+            cell.style.fontWeight = "bold";
             if (!classes.includes(cell.textContent)) {
                 classes.push(cell.textContent);
             }
@@ -16,3 +16,6 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log("- " + ora);
     });
 });
+function addNewLesson() {
+    
+}
