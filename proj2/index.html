@@ -1,143 +1,155 @@
 <!DOCTYPE html>
 <html lang="hu">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Órarend</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <div class="container-fluid py-5">
-        <div class="row justify-content-center">
-            <div class="col-12 col-xl-10">
-                <h1 class="text-center mb-4">Órarend</h1>
-                <div class="table-responsive shadow-lg rounded">
-                    <table class="table table-bordered mb-0">
-                        <thead class="table-header">
-                            <tr>
-                                <th scope="col">
-                                    
-                                </th>
-                                <th scope="col">Hétfő</th>
-                                <th scope="col">Kedd</th>
-                                <th scope="col">Szerda</th>
-                                <th scope="col">Csütörtök</th>
-                                <th scope="col">Péntek</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="time-column"><b>0. óra</b></td>
-                                <td id="h0" class="lesson-cell"></td>
-                                <td id="k0" class="lesson-cell"></td>
-                                <td id="sz0" class="lesson-cell"></td>
-                                <td id="cs0" class="lesson-cell">Tesi</td>
-                                <td id="p0" class="lesson-cell">Emelt matek</td>
-                            </tr>
-                            <tr>
-                                <td class="time-column"><b>1. óra</b></td>
-                                <td id="h1" class="lesson-cell">Német</td>
-                                <td id="k1" class="lesson-cell">Angol</td>
-                                <td id="sz1" class="lesson-cell"></td>
-                                <td id="cs1" class="lesson-cell">Tesi</td>
-                                <td id="p1" class="lesson-cell">Emelt matek</td>
-                            </tr>
-                            <tr>
-                                <td class="time-column"><b>2. óra</b></td>
-                                <td id="h2" class="lesson-cell">Szakmai angol</td>
-                                <td id="k2" class="lesson-cell">Matek</td>
-                                <td id="sz2" class="lesson-cell">Irodalom</td>
-                                <td id="cs2" class="lesson-cell">Szakmai angol</td>
-                                <td id="p2" class="lesson-cell">Állampolgári ismeretek</td>
-                            </tr>
-                            <tr>
-                                <td class="time-column"><b>3. óra</b></td>
-                                <td id="h3" class="lesson-cell">Történelem</td>
-                                <td id="k3" class="lesson-cell">Irodalom</td>
-                                <td id="sz3" class="lesson-cell">Nyelvtan</td>
-                                <td id="cs3" class="lesson-cell">Javascript</td>
-                                <td id="p3" class="lesson-cell">Matek</td>
-                            </tr>
-                            <tr>
-                                <td class="time-column"><b>4. óra</b></td>
-                                <td id="h4" class="lesson-cell">C#</td>
-                                <td id="k4" class="lesson-cell">Szakmai angol</td>
-                                <td id="sz4" class="lesson-cell">C#</td>
-                                <td id="cs4" class="lesson-cell">Webdesign</td>
-                                <td id="p4" class="lesson-cell">Történelem</td>
-                            </tr>
-                            <tr>
-                                <td class="time-column"><b>5. óra</b></td>
-                                <td id="h5" class="lesson-cell"></td>
-                                <td id="k5" class="lesson-cell">C#</td>
-                                <td id="sz5" class="lesson-cell">Történelem</td>
-                                <td id="cs5" class="lesson-cell">C#</td>
-                                <td id="p5" class="lesson-cell">Osztályfőnöki</td>
-                            </tr>
-                            <tr>
-                                <td class="time-column"><b>6. óra</b></td>
-                                <td id="h6" class="lesson-cell">Matek</td>
-                                <td id="k6" class="lesson-cell">C#</td>
-                                <td id="sz6" class="lesson-cell">Tesi</td>
-                                <td id="cs6" class="lesson-cell">Matek</td>
-                                <td id="p6" class="lesson-cell">Német</td>
-                            </tr>
-                            <tr>
-                                <td class="time-column"><b>7. óra</b></td>
-                                <td id="h7" class="lesson-cell"></td>
-                                <td id="k7" class="lesson-cell">Javascript</td>
-                                <td id="sz7" class="lesson-cell">Szoftvertesztelés</td>
-                                <td id="cs7" class="lesson-cell">PHP</td>
-                                <td id="p7" class="lesson-cell"></td>
-                            </tr>
-                            <tr>
-                                <td class="time-column"><b>8. óra</b></td>
-                                <td id="h8" class="lesson-cell"></td>
-                                <td id="k8" class="lesson-cell"></td>
-                                <td id="sz8" class="lesson-cell">Szoftvertesztelés</td>
-                                <td id="cs8" class="lesson-cell"></td>
-                                <td id="p8" class="lesson-cell"></td>
-                            </tr>
-                            <tr>
-                                <td class="time-column"><b>9. óra</b></td>
-                                <td id="h9" class="lesson-cell"></td>
-                                <td id="k9" class="lesson-cell"></td>
-                                <td id="sz9" class="lesson-cell"></td>
-                                <td id="cs9" class="lesson-cell"></td>
-                                <td id="p9" class="lesson-cell"></td>
-                            </tr>
-                            <tr>
-                                <td class="time-column"><b>10. óra</b></td>
-                                <td id="h10" class="lesson-cell"></td>
-                                <td id="k10" class="lesson-cell"></td>
-                                <td id="sz10" class="lesson-cell"></td>
-                                <td id="cs10" class="lesson-cell"></td>
-                                <td id="p10" class="lesson-cell"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="text-center container bg">
-                    <h2>Műveletek</h2>
-                    <button onclick="" class="btn btn-primary btn-md shadow">
-                        Új óra hozzáadása
-                        <!-- <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                              Default radio
-                            </label>
-                          </div> -->
-                        
-                    </button>
-                    <button onclick="removeSelected()" class="btn btn-danger btn-md shadow">
-                        Kiválasztott órák eltávolítása
-                    </button>
-                </div>
-            </div>
-        </div>
+      <div class="row justify-content-center">
+        <div class="col-12 col-xl-10">
+          <h1 class="text-center mb-4">Órarend</h1>
+          <div class="table-responsive shadow-lg rounded">
+            <table class="table table-bordered mb-0">
+              <thead class="table-header">
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Hétfő</th>
+                  <th scope="col">Kedd</th>
+                  <th scope="col">Szerda</th>
+                  <th scope="col">Csütörtök</th>
+                  <th scope="col">Péntek</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="time-column"><b>0. óra</b></td>
+                  <td id="h0" class="lesson-cell"></td>
+                  <td id="k0" class="lesson-cell"></td>
+                  <td id="sz0" class="lesson-cell"></td>
+                  <td id="cs0" class="lesson-cell">Tesi</td>
+                  <td id="p0" class="lesson-cell">Emelt matek</td>
+                </tr>
+                <tr>
+                  <td class="time-column"><b>1. óra</b></td>
+                  <td id="h1" class="lesson-cell">Német</td>
+                  <td id="k1" class="lesson-cell">Angol</td>
+                  <td id="sz1" class="lesson-cell"></td>
+                  <td id="cs1" class="lesson-cell">Tesi</td>
+                  <td id="p1" class="lesson-cell">Emelt matek</td>
+                </tr>
+                <tr>
+                  <td class="time-column"><b>2. óra</b></td>
+                  <td id="h2" class="lesson-cell">Szakmai angol</td>
+                  <td id="k2" class="lesson-cell">Matek</td>
+                  <td id="sz2" class="lesson-cell">Irodalom</td>
+                  <td id="cs2" class="lesson-cell">Szakmai angol</td>
+                  <td id="p2" class="lesson-cell">Állampolgári ismeretek</td>
+                </tr>
+                <tr>
+                  <td class="time-column"><b>3. óra</b></td>
+                  <td id="h3" class="lesson-cell">Történelem</td>
+                  <td id="k3" class="lesson-cell">Irodalom</td>
+                  <td id="sz3" class="lesson-cell">Nyelvtan</td>
+                  <td id="cs3" class="lesson-cell">Javascript</td>
+                  <td id="p3" class="lesson-cell">Matek</td>
+                </tr>
+                <tr>
+                  <td class="time-column"><b>4. óra</b></td>
+                  <td id="h4" class="lesson-cell">C#</td>
+                  <td id="k4" class="lesson-cell">Szakmai angol</td>
+                  <td id="sz4" class="lesson-cell">C#</td>
+                  <td id="cs4" class="lesson-cell">Webdesign</td>
+                  <td id="p4" class="lesson-cell">Történelem</td>
+                </tr>
+                <tr>
+                  <td class="time-column"><b>5. óra</b></td>
+                  <td id="h5" class="lesson-cell"></td>
+                  <td id="k5" class="lesson-cell">C#</td>
+                  <td id="sz5" class="lesson-cell">Történelem</td>
+                  <td id="cs5" class="lesson-cell">C#</td>
+                  <td id="p5" class="lesson-cell">Osztályfőnöki</td>
+                </tr>
+                <tr>
+                  <td class="time-column"><b>6. óra</b></td>
+                  <td id="h6" class="lesson-cell">Matek</td>
+                  <td id="k6" class="lesson-cell">C#</td>
+                  <td id="sz6" class="lesson-cell">Tesi</td>
+                  <td id="cs6" class="lesson-cell">Matek</td>
+                  <td id="p6" class="lesson-cell">Német</td>
+                </tr>
+                <tr>
+                  <td class="time-column"><b>7. óra</b></td>
+                  <td id="h7" class="lesson-cell"></td>
+                  <td id="k7" class="lesson-cell">Javascript</td>
+                  <td id="sz7" class="lesson-cell">Szoftvertesztelés</td>
+                  <td id="cs7" class="lesson-cell">PHP</td>
+                  <td id="p7" class="lesson-cell"></td>
+                </tr>
+                <tr>
+                  <td class="time-column"><b>8. óra</b></td>
+                  <td id="h8" class="lesson-cell"></td>
+                  <td id="k8" class="lesson-cell"></td>
+                  <td id="sz8" class="lesson-cell">Szoftvertesztelés</td>
+                  <td id="cs8" class="lesson-cell"></td>
+                  <td id="p8" class="lesson-cell"></td>
+                </tr>
+                <tr>
+                  <td class="time-column"><b>9. óra</b></td>
+                  <td id="h9" class="lesson-cell"></td>
+                  <td id="k9" class="lesson-cell"></td>
+                  <td id="sz9" class="lesson-cell"></td>
+                  <td id="cs9" class="lesson-cell"></td>
+                  <td id="p9" class="lesson-cell"></td>
+                </tr>
+                <tr>
+                  <td class="time-column"><b>10. óra</b></td>
+                  <td id="h10" class="lesson-cell"></td>
+                  <td id="k10" class="lesson-cell"></td>
+                  <td id="sz10" class="lesson-cell"></td>
+                  <td id="cs10" class="lesson-cell"></td>
+                  <td id="p10" class="lesson-cell"></td>
+                </tr>
+              </tbody>
+            </table>
+
+      </div>
+      <div class="text-center container row">
+        <h2>Műveletek</h2>
+        <div class="dropdown">
+          <button
+            onclick="populateDropdown()"
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="ujora"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Új óra hozzáadása
+          </button>
+        <!-- <button class="btn btn-primary btn-md shadow">
+          Új óra hozzáadása
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="flexRadioDefault"
+              id="flexRadioDefault1"
+            />
+            <label class="form-check-label" for="flexRadioDefault1">
+              Default radio
+            </label>
+          </div>
+        </button> -->
+      </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="main.js"></script>
-</body>
+  </body>
 </html>
