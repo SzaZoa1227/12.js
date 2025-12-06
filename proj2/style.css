@@ -50,6 +50,33 @@ h1 {
     z-index: 10;
 }
 
+/* Empty cell highlighting for adding classes */
+.empty-highlighted {
+    background-color: #d4edda !important;
+    border: 2px solid #28a745 !important;
+    animation: pulse 1.5s infinite;
+}
+
+.clickable-cell {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.clickable-cell:hover {
+    background-color: #c3e6cb !important;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
 .lesson-cell {
     min-height: 60px;
     padding: 1rem;
