@@ -77,6 +77,22 @@ h1 {
     }
 }
 
+/* Operations panel styling */
+.operations-panel {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.operations-panel h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+}
+
 .lesson-cell {
     min-height: 60px;
     padding: 1rem;
