@@ -3,6 +3,7 @@ let uresIdopontok = [];
 let kivalasztottTantargy = null;
 let hozzaadasAktiv = false;
 let torlesAktiv = false;
+let orarendObjektum = {};
 
 document.addEventListener("DOMContentLoaded", () => {
     orarendBetoltese();
@@ -120,6 +121,12 @@ function foglaltIdopontokKiemelese() {
 function tantargyHozzaadasaCellahoz(cellaAzonosito) {
     if (!hozzaadasAktiv || !kivalasztottTantargy) return;
     
+    orarendObjektum[cellaAzonosito] = {
+        tantargyNev: kivalasztottTantargy,
+        letrehozva: new Date().toISOString(),
+        modositva: null
+    };
+    
     const cella = document.getElementById(cellaAzonosito);
     cella.textContent = kivalasztottTantargy;
     cella.style.fontWeight = "bold";
@@ -130,14 +137,16 @@ function tantargyHozzaadasaCellahoz(cellaAzonosito) {
     
     modositasModKikapcsolasa();
     
-    console.log(`${kivalasztottTantargy} hozzáadva: ${cellaAzonosito}`);
+    console.log(`${kivalasztottTantargy} hozzáadva:`, orarendObjektum[cellaAzonosito]);
 }
 
 function tantargyTorleseCellabol(cellaAzonosito) {
     if (!torlesAktiv) return;
     
+    const toroltTantargy = orarendObjektum[cellaAzonosito];
+    delete orarendObjektum[cellaAzonosito];
+    
     const cella = document.getElementById(cellaAzonosito);
-    const toroltTantargy = cella.textContent.trim();
     cella.textContent = "";
     cella.style.fontWeight = "normal";
     
@@ -147,7 +156,7 @@ function tantargyTorleseCellabol(cellaAzonosito) {
     
     modositasModKikapcsolasa();
     
-    console.log(`${toroltTantargy} törölve: ${cellaAzonosito}`);
+    console.log(`Törölve:`, toroltTantargy);
 }
 
 function modositasModKikapcsolasa() {
@@ -166,26 +175,42 @@ function modositasModKikapcsolasa() {
 }
 
 function orarendMentese() {
-    const orarendAdatok = {};
-    document.querySelectorAll(".lesson-cell").forEach(cella => {
-        if (cella.textContent.trim() !== "") {
-            orarendAdatok[cella.id] = cella.textContent.trim();
-        }
-    });
-    localStorage.setItem("timetable", JSON.stringify(orarendAdatok));
-    console.log("Órarend mentve");
+    localStorage.setItem("timetable", JSON.stringify(orarendObjektum));
+    console.log("Órarend mentve:", orarendObjektum);
 }
 
 function orarendBetoltese() {
     const mentettAdatok = localStorage.getItem("timetable");
     if (mentettAdatok) {
-        const orarendAdatok = JSON.parse(mentettAdatok);
-        Object.keys(orarendAdatok).forEach(cellaAzonosito => {
+        orarendObjektum = JSON.parse(mentettAdatok);
+        Object.keys(orarendObjektum).forEach(cellaAzonosito => {
             const cella = document.getElementById(cellaAzonosito);
-            if (cella) {
-                cella.textContent = orarendAdatok[cellaAzonosito];
+            if (cella && orarendObjektum[cellaAzonosito].tantargyNev) {
+                cella.textContent = orarendObjektum[cellaAzonosito].tantargyNev;
             }
         });
-        console.log("Órarend betöltve");
+        console.log("Órarend betöltve:", orarendObjektum);
     }
+}
+
+function ujTantargyHozzaadasa() {
+    const beviteliMezo = document.getElementById("newClassName");
+    const tantargyNeve = beviteliMezo.value.trim();
+    
+    if (tantargyNeve === "") {
+        alert("Kérlek adj meg egy tantárgy nevet!");
+        return;
+    }
+    
+    if (tantargyakListaja.includes(tantargyNeve)) {
+        alert("Ez a tantárgy már létezik!");
+        return;
+    }
+    
+    tantargyakListaja.push(tantargyNeve);
+    tantargyakListaja.sort();
+    beviteliMezo.value = "";
+    
+    console.log(`Új tantárgy hozzáadva: ${tantargyNeve}`);
+    alert(`"${tantargyNeve}" tantárgy hozzáadva! Most válaszd ki a legördülő menüből és kattints egy üres cellára.`);
 }
