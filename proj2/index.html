@@ -1,7 +1,4 @@
 <!DOCTYPE html>
-<!-- todo: kellene eltávolítani, kellene valami csavar is a feladatba.
-todo: design?
-todo: bootstrap dropdown használata -->
 <html lang="hu">
   <head>
     <meta charset="UTF-8" />
@@ -15,34 +12,39 @@ todo: bootstrap dropdown használata -->
   </head>
   <body>
     <div class="container-fluid py-5">
-      <div class="row justify-content-center mb-5">
-        <div class="col-12">
-          <h1 class="text-center">Órarend</h1>
-        </div>
-      </div>
       <div class="row justify-content-center mb-4">
         <div class="col-12 col-xl-10">
-          <div class="row">
+          <div class="row align-items-center">
             <div class="col-12 col-md-6 col-lg-4 col-xl-3">
               <div class="operations-panel">
                 <h2 class="text-white mb-3">Műveletek</h2>
-                <div class="dropdown mb-3">
+                <div class="dropdown mb-3 zindex-1000">
                   <button
-                    onclick="populateDropdown()"
+                    onclick="legorduloMenuFeltoltese()"
                     class="btn btn-secondary dropdown-toggle w-100"
                     type="button"
                     id="ujora"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    Új óra
+                    Óra hozzáadása
                   </button>
-                  <ul class="dropdown-menu w-100" aria-labelledby="ujora" id="dropdownMenu">
-                    <!-- JavaScript tölti fel -->
+                  <ul class="dropdown-menu w-100 zindex-1000" aria-labelledby="ujora" id="dropdownMenu">
+                    <!-- js -->
                   </ul>
                 </div>
+                <button
+                  onclick="tantargyTorlesModBekapcsolasa()"
+                  class="btn btn-danger w-100"
+                  type="button"
+                >
+                  Óra törlése
+                </button>
                 <p class="text-white" id="instructionText"></p>
               </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-8 col-xl-9 d-flex align-items-center justify-content-center">
+              <h1 class="text-center text-white" style="margin-bottom: 0;">Órarend</h1>
             </div>
           </div>
         </div>
@@ -74,9 +76,9 @@ todo: bootstrap dropdown használata -->
                 <tr>
                   <td class="time-column"><b>1. óra</b></td>
                   <td id="h1" class="lesson-cell">Német</td>
-                  <td id="k1" class="lesson-cell">Angol</td>
+                  <td id="k1" class="lesson-cell"></td>
                   <td id="sz1" class="lesson-cell"></td>
-                  <td id="cs1" class="lesson-cell">Tesi</td>
+                  <td id="cs1" class="lesson-cell">Tesi</td>  
                   <td id="p1" class="lesson-cell">Emelt matek</td>
                 </tr>
                 <tr>

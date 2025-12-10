@@ -1,176 +1,189 @@
-let orak = [];
-let lyukasorak = [];
-let kivalasztottOra = null;
-let hozzaadBool = false;
+let tantargyakListaja = [];
+let uresIdopontok = [];
+let kivalasztottTantargy = null;
+let hozzaadasAktiv = false;
+let torlesAktiv = false;
 
 document.addEventListener("DOMContentLoaded", () => {
-    loadFromLocalStorage();
-    initializeTimetable();
+    orarendBetoltese();
+    tantargyakKeresese();
 });
 
-function initializeTimetable() {
-    let tdk = document.querySelectorAll(".lesson-cell");
-    tdk.forEach((cell) => {
-        if (cell.textContent.trim() !== "") {
-            cell.style.fontWeight = "bold";
-            if (!orak.includes(cell.textContent.trim())) {
-                orak.push(cell.textContent.trim());
+function tantargyakKeresese() {
+    let osszesOracella = document.querySelectorAll(".lesson-cell");
+    osszesOracella.forEach((cella) => {
+        if (cella.textContent.trim() !== "") {
+            cella.style.fontWeight = "bold";
+            if (!tantargyakListaja.includes(cella.textContent.trim())) {
+                tantargyakListaja.push(cella.textContent.trim());
             }
         }
     });
-    orak.sort();
+    tantargyakListaja.sort();
     console.log("Az órarendben szereplő tantárgyak:");
-    orak.forEach((ora) => {
-        console.log("- " + ora);
+    tantargyakListaja.forEach((tantargy) => {
+        console.log("- " + tantargy);
     });
-    updateEmptyPeriods();
+    uresIdopontokFrissitese();
 }
 
-function updateEmptyPeriods() {
-    lyukasorak = [];
-    let mindenTD = document.querySelectorAll(".lesson-cell");
-    mindenTD.forEach(td => {
-        if (td.textContent.trim() === "") {
-            lyukasorak.push(td.id);
+function uresIdopontokFrissitese() {
+    uresIdopontok = [];
+    let osszesOracella = document.querySelectorAll(".lesson-cell");
+    osszesOracella.forEach(cella => {
+        if (cella.textContent.trim() === "") {
+            uresIdopontok.push(cella.id);
         }
     });
-    console.log("Üres időpontok:", lyukasorak);
+    console.log("Üres időpontok:", uresIdopontok);
 }
 
-function populateDropdown(){
-    const dropdownMenu = document.getElementById("dropdownMenu");
-    dropdownMenu.innerHTML = "";
+function legorduloMenuFeltoltese(){
+    const legorduloMenu = document.getElementById("dropdownMenu");
+    legorduloMenu.innerHTML = "";
     
-    if (orak.length === 0) {
-        let li = document.createElement("li");
-        let span = document.createElement("span");
-        span.className = "dropdown-item text-muted";
-        span.textContent = "Nincs elérhető tantárgy";
-        li.appendChild(span);
-        dropdownMenu.appendChild(li);
+    if (tantargyakListaja.length === 0) {
+        let listaElem = document.createElement("li");
+        let szovegElem = document.createElement("span");
+        szovegElem.className = "dropdown-item text-muted";
+        szovegElem.textContent = "Nincs elérhető tantárgy";
+        listaElem.appendChild(szovegElem);
+        legorduloMenu.appendChild(listaElem);
         return;
     }
     
-    orak.forEach((ora) => {
-        let li = document.createElement("li");
-        let a = document.createElement("a");
-        a.className = "dropdown-item";
-        a.href = "#";
-        a.textContent = ora;
-        a.onclick = (e) => {
-            e.preventDefault();
-            selectClassForAdding(ora);
+    tantargyakListaja.forEach((tantargy) => {
+        let listaElem = document.createElement("li");
+        let linkElem = document.createElement("a");
+        linkElem.className = "dropdown-item zindex-1000";
+        linkElem.href = "#";
+        linkElem.textContent = tantargy;
+        linkElem.onclick = (esemeny) => {
+            esemeny.preventDefault();
+            tantargyHozzaadasModBekapcsolasa(tantargy);
         };
-        li.appendChild(a);
-        dropdownMenu.appendChild(li);
+        listaElem.appendChild(linkElem);
+        legorduloMenu.appendChild(listaElem);
     });
 }
 
-function selectClassForAdding(className) {
-    kivalasztottOra = className;
-    hozzaadBool = true;
-    const instructionText = document.getElementById("instructionText");
-    instructionText.textContent = `Kattints egy üres cellára a "${className}" hozzáadásához, vagy kattints ide a törléshez.`;
-    instructionText.style.cursor = "pointer";
-    instructionText.onclick = cancelAddingMode;
-    highlightEmptyCells();
-    lyukasorak.forEach(cellId => {
-        const cell = document.getElementById(cellId);
-        cell.onclick = () => addClassToCell(cellId);
+function tantargyHozzaadasModBekapcsolasa(tantargyNeve) {
+    kivalasztottTantargy = tantargyNeve;
+    hozzaadasAktiv = true;
+    torlesAktiv = false;
+    const utmutataszoSzoveg = document.getElementById("instructionText");
+    utmutataszoSzoveg.textContent = `Kattints egy üres cellára a "${tantargyNeve}" hozzáadásához, vagy kattints ide a megszakításhoz.`;
+    utmutataszoSzoveg.style.cursor = "pointer";
+    utmutataszoSzoveg.onclick = () => modositasModKikapcsolasa();
+    uresIdopontokKiemelese();
+    uresIdopontok.forEach(cellaAzonosito => {
+        const cella = document.getElementById(cellaAzonosito);
+        cella.onclick = () => tantargyHozzaadasaCellahoz(cellaAzonosito);
     });
 }
 
-function highlightEmptyCells() {
-    // Remove previous highlights
-    document.querySelectorAll(".lesson-cell").forEach(cell => {
-        cell.classList.remove("empty-highlighted", "clickable-cell");
-    });
-    
-    // Highlight empty cells
-    lyukasorak.forEach(cellId => {
-        const cell = document.getElementById(cellId);
-        cell.classList.add("empty-highlighted", "clickable-cell");
-    });
-}
-
-function addClassToCell(cellId) {
-    if (!hozzaadBool || !kivalasztottOra) return;
-    
-    const cell = document.getElementById(cellId);
-    cell.textContent = kivalasztottOra;
-    cell.style.fontWeight = "bold";
-    
-    // Save to localStorage
-    saveToLocalStorage();
-    
-    // Update empty periods list
-    updateEmptyPeriods();
-    
-    // Cancel adding mode
-    cancelAddingMode();
-    
-    console.log(`${kivalasztottOra} hozzáadva: ${cellId}`);
-}
-
-function cancelAddingMode() {
-    hozzaadBool = false;
-    kivalasztottOra = null;
-    
-    // Clear instruction text
-    const instructionText = document.getElementById("instructionText");
-    instructionText.textContent = "";
-    instructionText.onclick = null;
-    
-    // Remove highlights and click handlers
-    document.querySelectorAll(".lesson-cell").forEach(cell => {
-        cell.classList.remove("empty-highlighted", "clickable-cell");
-        if (cell.textContent.trim() === "") {
-            cell.onclick = null;
+function tantargyTorlesModBekapcsolasa() {
+    torlesAktiv = true;
+    hozzaadasAktiv = false;
+    kivalasztottTantargy = null;
+    const utmutataszoSzoveg = document.getElementById("instructionText");
+    utmutataszoSzoveg.textContent = "Kattints egy tantárgyra annak törléséhez, vagy kattints ide a megszakításhoz.";
+    utmutataszoSzoveg.style.cursor = "pointer";
+    utmutataszoSzoveg.onclick = () => modositasModKikapcsolasa();
+    foglaltIdopontokKiemelese();
+    let osszesOracella = document.querySelectorAll(".lesson-cell");
+    osszesOracella.forEach(cella => {
+        if (cella.textContent.trim() !== "") {
+            cella.classList.add("delete-highlighted", "clickable-cell");
+            cella.onclick = () => tantargyTorleseCellabol(cella.id);
         }
     });
 }
 
-function addNewClass() {
-    const input = document.getElementById("newClassName");
-    const className = input.value.trim();
+function uresIdopontokKiemelese() {
+    document.querySelectorAll(".lesson-cell").forEach(cella => {
+        cella.classList.remove("empty-highlighted", "clickable-cell", "delete-highlighted");
+    });
     
-    if (className === "") {
-        alert("Kérlek adj meg egy tantárgy nevet!");
-        return;
-    }
-    
-    if (orak.includes(className)) {
-        alert("Ez a tantárgy már létezik!");
-        return;
-    }
-    
-    orak.push(className);
-    orak.sort();
-    input.value = "";
-    
-    console.log(`Új tantárgy hozzáadva: ${className}`);
-    alert(`"${className}" tantárgy hozzáadva! Most válaszd ki a legördülő menüből és kattints egy üres cellára.`);
+    uresIdopontok.forEach(cellaAzonosito => {
+        const cella = document.getElementById(cellaAzonosito);
+        cella.classList.add("empty-highlighted", "clickable-cell");
+    });
 }
 
-function saveToLocalStorage() {
-    const timetableData = {};
-    document.querySelectorAll(".lesson-cell").forEach(cell => {
-        if (cell.textContent.trim() !== "") {
-            timetableData[cell.id] = cell.textContent.trim();
+function foglaltIdopontokKiemelese() {
+    document.querySelectorAll(".lesson-cell").forEach(cella => {
+        cella.classList.remove("empty-highlighted", "clickable-cell", "delete-highlighted");
+    });
+}
+
+function tantargyHozzaadasaCellahoz(cellaAzonosito) {
+    if (!hozzaadasAktiv || !kivalasztottTantargy) return;
+    
+    const cella = document.getElementById(cellaAzonosito);
+    cella.textContent = kivalasztottTantargy;
+    cella.style.fontWeight = "bold";
+    
+    orarendMentese();
+    
+    uresIdopontokFrissitese();
+    
+    modositasModKikapcsolasa();
+    
+    console.log(`${kivalasztottTantargy} hozzáadva: ${cellaAzonosito}`);
+}
+
+function tantargyTorleseCellabol(cellaAzonosito) {
+    if (!torlesAktiv) return;
+    
+    const cella = document.getElementById(cellaAzonosito);
+    const toroltTantargy = cella.textContent.trim();
+    cella.textContent = "";
+    cella.style.fontWeight = "normal";
+    
+    orarendMentese();
+    
+    uresIdopontokFrissitese();
+    
+    modositasModKikapcsolasa();
+    
+    console.log(`${toroltTantargy} törölve: ${cellaAzonosito}`);
+}
+
+function modositasModKikapcsolasa() {
+    hozzaadasAktiv = false;
+    torlesAktiv = false;
+    kivalasztottTantargy = null;
+    
+    const utmutataszoSzoveg = document.getElementById("instructionText");
+    utmutataszoSzoveg.textContent = "";
+    utmutataszoSzoveg.onclick = null;
+    
+    document.querySelectorAll(".lesson-cell").forEach(cella => {
+        cella.classList.remove("empty-highlighted", "clickable-cell", "delete-highlighted");
+        cella.onclick = null;
+    });
+}
+
+function orarendMentese() {
+    const orarendAdatok = {};
+    document.querySelectorAll(".lesson-cell").forEach(cella => {
+        if (cella.textContent.trim() !== "") {
+            orarendAdatok[cella.id] = cella.textContent.trim();
         }
     });
-    localStorage.setItem("timetable", JSON.stringify(timetableData));
+    localStorage.setItem("timetable", JSON.stringify(orarendAdatok));
     console.log("Órarend mentve");
 }
 
-function loadFromLocalStorage() {
-    const saved = localStorage.getItem("timetable");
-    if (saved) {
-        const timetableData = JSON.parse(saved);
-        Object.keys(timetableData).forEach(cellId => {
-            const cell = document.getElementById(cellId);
-            if (cell) {
-                cell.textContent = timetableData[cellId];
+function orarendBetoltese() {
+    const mentettAdatok = localStorage.getItem("timetable");
+    if (mentettAdatok) {
+        const orarendAdatok = JSON.parse(mentettAdatok);
+        Object.keys(orarendAdatok).forEach(cellaAzonosito => {
+            const cella = document.getElementById(cellaAzonosito);
+            if (cella) {
+                cella.textContent = orarendAdatok[cellaAzonosito];
             }
         });
         console.log("Órarend betöltve");

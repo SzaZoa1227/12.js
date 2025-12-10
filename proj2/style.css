@@ -1,4 +1,3 @@
-/* Custom styles to enhance Bootstrap */
 body {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
@@ -50,11 +49,22 @@ h1 {
     z-index: 10;
 }
 
-/* Empty cell highlighting for adding classes */
 .empty-highlighted {
     background-color: #d4edda !important;
     border: 2px solid #28a745 !important;
     animation: pulse 1.5s infinite;
+}
+
+.delete-highlighted {
+    background-color: #f8d7da !important;
+    border: 2px solid #dc3545 !important;
+    animation: pulse 1.5s infinite;
+}
+
+.delete-highlighted:hover {
+    background-color: #f5c2c7 !important;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
 }
 
 .clickable-cell {
@@ -77,7 +87,6 @@ h1 {
     }
 }
 
-/* Operations panel styling */
 .operations-panel {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 15px;
@@ -85,12 +94,21 @@ h1 {
     backdrop-filter: blur(10px);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.18);
+    position: relative;
+    z-index: 100;
 }
 
 .operations-panel h2 {
     font-size: 1.5rem;
     font-weight: 600;
     text-align: center;
+}
+
+.dropdown-menu {
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 2000 !important;
+    position: absolute !important;
 }
 
 .lesson-cell {
@@ -117,35 +135,4 @@ h1 {
 
 tbody tr:hover {
     background-color: rgba(102, 126, 234, 0.05);
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    h1 {
-        font-size: 1.8rem;
-    }
-    
-    .table-header th,
-    .lesson-cell,
-    .time-column {
-        padding: 0.75rem 0.5rem;
-        font-size: 0.875rem;
-    }
-    
-    .time-column {
-        min-width: 70px;
-    }
-}
-
-@media (max-width: 576px) {
-    h1 {
-        font-size: 1.5rem;
-    }
-    
-    .table-header th,
-    .lesson-cell,
-    .time-column {
-        padding: 0.5rem 0.25rem;
-        font-size: 0.75rem;
-    }
 }
