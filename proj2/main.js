@@ -21,7 +21,7 @@ function tantargyakKeresese() {
         }
     });
     tantargyakListaja.sort();
-    console.log("Az órarendben szereplő tantárgyak:");
+    console.log("targyak:");
     tantargyakListaja.forEach((tantargy) => {
         console.log("- " + tantargy);
     });
@@ -36,7 +36,7 @@ function uresIdopontokFrissitese() {
             uresIdopontok.push(cella.id);
         }
     });
-    console.log("Üres időpontok:", uresIdopontok);
+    console.log("idopontok:", uresIdopontok);
 }
 
 function legorduloMenuFeltoltese(){
@@ -136,7 +136,7 @@ function tantargyHozzaadasaCellahoz(cellaAzonosito) {
     
     modositasModKikapcsolasa();
     
-    console.log(`${kivalasztottTantargy} hozzáadva:`, orarendObjektum[cellaAzonosito]);
+    console.log(`${kivalasztottTantargy} hozzadva:`, orarendObjektum[cellaAzonosito]);
 }
 
 function tantargyTorleseCellabol(cellaAzonosito) {
@@ -155,7 +155,7 @@ function tantargyTorleseCellabol(cellaAzonosito) {
     
     modositasModKikapcsolasa();
     
-    console.log(`Törölve:`, toroltTantargy);
+    console.log(`torolve:`, toroltTantargy);
 }
 
 function modositasModKikapcsolasa() {
@@ -175,7 +175,7 @@ function modositasModKikapcsolasa() {
 
 function orarendMentese() {
     localStorage.setItem("timetable", JSON.stringify(orarendObjektum));
-    console.log("Órarend mentve:", orarendObjektum);
+    console.log("mentett orarend:", orarendObjektum);
 }
 
 function orarendBetoltese() {
@@ -188,7 +188,7 @@ function orarendBetoltese() {
                 cella.textContent = orarendObjektum[cellaAzonosito].tantargyNev;
             }
         });
-        console.log("Órarend betöltve:", orarendObjektum);
+        console.log("betoltott orarend:", orarendObjektum);
     }
 }
 
@@ -210,6 +210,6 @@ function ujTantargyHozzaadasa() {
     tantargyakListaja.sort();
     beviteliMezo.value = "";
     
-    console.log(`Új tantárgy hozzáadva: ${tantargyNeve}`);
+    console.log(`uj tantargy hozzadva ${tantargyNeve}`);
     alert(`"${tantargyNeve}" tantárgy hozzáadva! Most válaszd ki a legördülő menüből és kattints egy üres cellára.`);
 }
