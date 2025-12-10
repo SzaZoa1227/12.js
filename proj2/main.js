@@ -123,8 +123,7 @@ function tantargyHozzaadasaCellahoz(cellaAzonosito) {
     
     orarendObjektum[cellaAzonosito] = {
         tantargyNev: kivalasztottTantargy,
-        letrehozva: new Date().toISOString(),
-        modositva: null
+        letrehozva: new Date().toISOString()
     };
     
     const cella = document.getElementById(cellaAzonosito);
